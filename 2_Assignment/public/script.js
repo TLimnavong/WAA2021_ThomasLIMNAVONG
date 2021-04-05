@@ -19,7 +19,7 @@ function registerUser(){
     console.log(saveImage_btn)
     let user_message = document.getElementById('user_message')
     if(input.value.length >= 3){
-        //Unlock draw button
+        //Unlock draw button and save image
         if(draw_btn.disabled == true && saveImage_btn.disabled == true){ draw_btn.disabled = false }{saveImage_btn.disabled = false}
             username = input.value
             user_message.innerHTML = `You are now logged in as : <b>${username}</b>`
@@ -222,7 +222,7 @@ function drawCircleAtCursor(x,y, pencil_color = document.getElementById('pencil_
     c.fill()
 }
 
-// Button SAVE Image
+
 
 
 // NETWORK
@@ -254,7 +254,7 @@ socket.on('share_line', (line) => {
 })
 
 
-// Button SAVE Image
+// Button SAVE Image get a json to send it to the database
 function saveImage(){
     alert('test')
     const d= new Date()
@@ -263,6 +263,7 @@ function saveImage(){
 
     console.log(date)
     console.log(username)
+    //call the app.post which send the image in the database and in the folder
     fetch('/submit_images', 
     {   
 
