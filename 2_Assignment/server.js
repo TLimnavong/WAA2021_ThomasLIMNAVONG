@@ -38,6 +38,8 @@ io.on('connect', (socket) => {
     socket.broadcast.emit('share_line', line_specs)
   })
 })
+
+
 // create an endpoint where we will get the image from mongo
 app.get('/get_images', (req, res) => {
   //link to go back to the main page
@@ -63,6 +65,7 @@ app.get('/get_images', (req, res) => {
   })
 })
 
+
 //post images on mongodb 
 app.post('/submit_images',jsonParser, function(req, res){
   //Add to mongo db
@@ -76,7 +79,6 @@ db.collection('images').insertOne(req.body, function(err, res){
 res.status(200).json({
   message: 'OK'
 })
-
 const json=req.body
 //convert the file on png and put it in the folder Images
 if(json){
@@ -91,9 +93,6 @@ if(json){
 else{console.log('body is empty')}
 
 })
-
-
-
 
 
 
