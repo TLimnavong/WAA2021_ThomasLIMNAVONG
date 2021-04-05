@@ -38,14 +38,17 @@ io.on('connect', (socket) => {
     socket.broadcast.emit('share_line', line_specs)
   })
 })
-
+// create an endpoint where we will get the image from mongo
 app.get('/get_images', (req, res) => {
-  
+  //link to go back to the main page
   let html='<a href="/">Go Back to the page</a>'
+  //request that get all the image in the database
   db.collection('images').find().toArray(function (err, result){
     if(err) throw err
+    //loop to take all the images in the database
     for(let i=0; i<result.length;i++)
       {
+        //create a div for all the images
         html+=`<div class='container'>
             <h4> user:${result[i].username} </h4>
             <h4> date:${new Date(result[i].nowdate)}</h4>
@@ -75,6 +78,7 @@ res.status(200).json({
 })
 
 const json=req.body
+//convert the file on png and put it in the folder Images
 if(json){
   console.log('1')
   let imageurl= json.image.replace(/^data:image\/\w+;base64,/,"")
